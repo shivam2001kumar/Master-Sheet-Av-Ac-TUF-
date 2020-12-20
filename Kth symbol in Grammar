@@ -1,0 +1,29 @@
+//   k ->
+//    0
+// ^  0 1
+// |  0 1 1 0
+// n  0 1 1 0 1 0 0 1
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int kth(int n,int k)
+{
+    if(n==1 && k==1)
+        return 0;
+    int mid=pow(2,n-1)/2;
+    if(k<=mid)
+    {
+       return kth(n-1,k);
+    }   
+    else 
+    return !kth(n-1,k-mid);
+}
+int main()
+{
+    int n,k;
+    cin>>n>>k;
+    cout<<kth(n,k);
+    return 0;
+
+}
