@@ -1,0 +1,32 @@
+void generate(int open,int close,string op,vector<string> &sol)
+{
+    if(open==0 && close==0)
+    {
+        sol.push_back(op);
+        return;
+    }
+    if(open!=0) // open braces option
+    {
+     string op1=op;
+     op1.push_back('(');
+     generate(open-1,close,op1,sol);
+    }
+    
+    if(close>open) // close braces option
+    {
+        string op2=op;
+        op2.push_back(')');
+        generate(open,close-1,op2,sol);
+    }
+    return;
+}
+
+vector<string> Solution::generateParenthesis(int A) {
+    vector<string> sol;
+    int open=A;
+    int close=A;
+    string op="";
+    generate(open,close,op,sol);
+    sort(sol.begin(),sol.end());
+    return sol;
+}
