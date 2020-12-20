@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+void tower(int s,int h,int d,int n)
+{
+    if(n==1)
+    {
+        cout<<"Move disk "<<n<<" from "<<s<<" to "<<d<<"\n";
+        return ;
+    }      
+    tower(s,d,h,n-1);
+    cout<<"Move disk "<<n<<" from "<<s<<" to "<<d<<"\n";
+    tower(h,s,d,n-1);
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int s=1,h=2,d=3;
+    tower(s,h,d,n);
+    return 0;
+}
