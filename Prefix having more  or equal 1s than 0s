@@ -1,0 +1,38 @@
+// in prefix nmber of 1s should be greater equal than number of zeroes
+#include<bits/stdc++.h>
+using namespace std;
+void solve(int one,int zero,int ip,string op)
+{
+    if(ip==0)
+    {
+        cout<<op<<" ";
+        return;
+    }
+    
+    //1s choice --> Always
+    string op1=op;
+    op1.push_back('1');
+    solve(one+1,zero,ip-1,op1);
+
+    // Zeroes choice when 1s>0s
+    if(one>zero)
+    {
+        string op2=op;
+        op2.push_back('0');
+        solve(one,zero+1,ip-1,op2);
+    }
+    return;
+
+
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int one=0;
+    int zero=0;
+    string op="";
+    solve(one,zero,n,op);
+
+    return 0;
+}
