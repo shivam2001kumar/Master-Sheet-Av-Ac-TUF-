@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+using namespace std;
+void count(int n,int i,int j,int &path)
+{
+    if(i>=n || j>=n) return ;
+    if(i==n-1 && j==n-1) path++;
+    count(n,i+1,j,path);
+    count(n,i,j+1,path);
+ 
+}
+int main()
+{
+    int n;
+    int i=0,j=0;
+    cin>>n;
+    int path=0;
+    count(n,i,j,path);
+    cout<<path;
+    return 0;
+}
