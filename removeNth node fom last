@@ -1,0 +1,77 @@
+// Remove nth node from end of a linked lIst
+
+// Approaches:
+//1. Brute Force- count length of list (n) traverse (n-given node pos) and delete next of it
+        // time complexity: O(2n) given node pos=n
+// 2. Fast and slow pointer O(n)
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+public:
+    int data;
+    node *next;
+    node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
+};
+
+void insertAtTail(node *&head, int data)
+{
+    node *n = new node(data);
+    if (head == NULL)
+    {
+        head = n;
+        return;
+    }
+    node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = n;
+}
+
+void display(node *head)
+{
+    node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << "->";
+        temp = temp->next;
+    }
+    cout << "NULL";
+}
+void removeNthNode(node* &head,int n)
+{
+    node *dummy=new node(0);
+    dummy->next=head;
+    node*slow=dummy,*fast=dummy;
+    for(int i=1;i<=n;i++)
+    {
+        fast=fast->next;
+    }
+    while(fast->next!=NULL)
+    {
+        slow=slow->next;
+        fast=fast->next;
+    }
+    slow->next=slow->next->next;
+}
+int main()
+{
+    node *head = NULL;
+    insertAtTail(head, 1);
+    insertAtTail(head, 2);
+    insertAtTail(head, 3);
+    insertAtTail(head, 4);
+    insertAtTail(head, 5);
+    removeNthNode(head,4);
+    display(head);
+    return 0;
+}
