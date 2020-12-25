@@ -1,0 +1,40 @@
+Approaches:
+
+// clock wiaw
+1>.O(k*n)-pick last element every k times and point it to first element
+2>.o(n) times - k=k%l     k=l-k  
+
+node* rotate(Node* head, int k) {
+    // Your code here
+    if(head==NULL || head->next==NULL || k==0) return head;
+    Node*ptr=head;
+    
+    int l=1;
+    while(ptr->next!=NULL && ++l)
+        ptr=ptr->next;
+    ptr->next=head;
+    k=k%l;
+    k=l-k;
+    while(k--)
+        ptr=ptr->next;
+    head=ptr->next;
+    ptr->next=NULL;
+    return head;
+}
+
+// Anti clock wisw
+/*  This function should rotate list counter-clockwise
+    by k and return new head (if changed) */
+Node* rotate(Node* head, int k) {
+    // Your code here
+    Node*ptr=head;
+    Node*temp=head;
+    while(ptr->next!=NULL)
+        ptr=ptr->next;
+    ptr->next=head;
+    for(int i=0;i<k-1;i++)
+        temp=temp->next;
+    head=temp->next;
+    temp->next=NULL;
+    return head;
+}
