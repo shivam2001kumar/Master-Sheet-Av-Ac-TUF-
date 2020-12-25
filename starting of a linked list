@@ -1,0 +1,49 @@
+Approaches:
+1>.Hashing ---> time-O(n) and space o(n)
+2>.Fast and slow pointer time-O(n) and space O(1)
+
+Hashing approach
+
+ListNode *detectCycle(ListNode *head) {
+       map<ListNode*,int>mp;
+        int i=0;
+        ListNode*ptr=head;
+        while(ptr)
+        {
+            if(mp.find(ptr)==mp.end()) mp[ptr]=i++;
+            else
+                return ptr;
+            ptr=ptr->next;
+        }
+     return NULL; 
+     
+    }
+    
+    
+    
+    2>.Fast and slow pointer approach
+    
+    class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+      if(head==NULL || head->next==NULL) return NULL;
+      ListNode *slow=head;
+      ListNode*fast=head;
+      ListNode*entry=head;
+      while(fast->next && fast->next->next)
+      {
+          slow=slow->next;
+          fast=fast->next->next;
+          if(slow==fast)
+          {
+              while(slow!=entry)
+              {
+                  slow=slow->next;
+                  entry=entry->next;
+              }
+              return entry;
+          }
+      }
+      return NULL;  
+    }
+};
