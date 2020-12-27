@@ -1,3 +1,5 @@
+Time complexity-> O(n+k) where k is the range and time complexity depends on k   , time complexity to be of O(n) ,k should be 0<=k<=n
+
 // Count sort
 #include<bits/stdc++.h>
 using namespace std;
