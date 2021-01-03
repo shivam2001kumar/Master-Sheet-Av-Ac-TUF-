@@ -1,0 +1,50 @@
+//Approaches:
+// 1. sort-nlogn
+// 2. heap-nlogk
+// 3.quick select-O(n)-best case 1 2 4 5 3 k=3
+// worst case happens very rare - 1 2 3 4 5 k=1 O(n^2)
+
+// quick select--> find pivot index same as quick sort
+// if (k == pivotIndex)
+//         return A[k];
+ 
+//     // if k is less than the pivot index
+//     else if (k < pivotIndex)
+//         return quickselect(A, left, pivotIndex - 1, k);
+ 
+//     // if k is more than the pivot index
+//     else
+//         return quickselect(A, pivotIndex + 1, right, k);
+
+    // STL Library
+// nth_element(a.begin(), a.begin() + k - 1, a.end());
+// cout<<a[k-1]
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int arr[n];
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
+        int k;
+        cin>>k;
+        priority_queue<int> minh;
+        for(int i=0;i<n;i++)
+        {
+            minh.push(arr[i]);
+            while(minh.size()>k)
+                minh.pop();
+                
+        }
+        cout<<minh.top()<<"\n";
+    }
+    return 0;
+}
