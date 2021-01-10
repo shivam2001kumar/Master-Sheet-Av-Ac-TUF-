@@ -1,0 +1,122 @@
+// Floyd's Cycle detection algorithm
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+public:
+    int data;
+    node *next;
+    node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
+};
+
+void insertAtTail(node *&head, int data)
+{
+    node *n = new node(data);
+    if (head == NULL)
+    {
+        head = n;
+        return;
+    }
+    node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = n;
+}
+
+void display(node *head)
+{
+    node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << "->";
+        temp = temp->next;
+    }
+    cout << "NULL";
+}
+
+void makeCycle(node* &head,int pos)
+{
+    if(pos==0) return;
+    node*temp=head;
+    int count=1;
+    node* newHead;
+    while(temp->next)
+    {
+        if(count==pos)
+        {
+            newHead=temp;
+        }
+        temp=temp->next;
+        count++;
+    }
+    temp->next=newHead;
+}
+
+void removeCycle(node* &head)
+{
+    int flag=0;
+    node* slow=head;
+    node* fast=head;
+    while(fast && fast->next)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast)
+        {
+            flag=1;        
+            break;
+        }
+    }
+    if(flag==1)
+    {
+        fast=head;
+        while(fast->next!=slow->next)
+        {
+            fast=fast->next;
+            slow=fast->next;
+        }
+        slow->next=NULL;
+    }
+    
+}
+bool floydCycle(node* head)
+{
+    node* slow=head;
+    node* fast=head;
+    while(fast && fast->next)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main()
+{
+    node *head = NULL;
+    int k;
+    cin>>k;
+    insertAtTail(head, 1);
+    insertAtTail(head, 2);
+    insertAtTail(head, 3);
+    insertAtTail(head, 4);
+    insertAtTail(head, 5);
+    insertAtTail(head, 6);
+    makeCycle(head,3);
+    cout<<floydCycle(head);
+    removeCycle(head);
+    cout<<"\n";
+    cout<<floydCycle(head);
+    return 0;
+}
