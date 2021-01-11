@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//Brute force solution ) O(n^2)
+// count the number of values less than or equal to k
+// go through every subarray and check for minimum number of outofRange element
+// optimised solution is using sliding window technique works in O(n)
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int arr[n];
+        for(int i=0;i<n;i++)
+            cin>>arr[i];
+        int k;
+        cin>>k;
+        
+        //counting total number of elements of whose value is less equal than k
+        int winSize=0;
+        for(int i=0;i<n;i++)
+            if(arr[i]<=k)
+                winSize++; //this will decide the size of window
+                
+         //set the window size and move to every window and find window with minimum number of outOfRange values
+         //1st window
+         int outOfRange=0;
+         for(int i=0;i<winSize;i++)
+            if(arr[i]>k)
+                outOfRange++;
+                
+        int ans=outOfRange;
+        for(int i=0,j=winSize;j<n;i++,j++)
+        {
+            if(arr[i]>k)
+                outOfRange--;
+            if(arr[j]>k)
+                outOfRange++;
+            ans=min(ans,outOfRange);    
+        }
+        cout<<ans<<"\n";
+    }
+    return 0;
+}
