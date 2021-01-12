@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n=nums.size();
+        // ex-2 3 1 1 4
+        if(nums[0]==0) return 0;
+        if(nums.size()==1) return 0; // 0 steps needed
+        int curr_end=nums[0];
+        // maximum pos we can reach after exploring all the positions we can jump from this index(Range between (0,i)  jump we have made
+        int farthest=nums[0]; // maintains farthest reachable position till that index. jumps we could have made
+        int jump=1;
+        for(int i=1;i<n;i++) // exploring the possibilities
+        {
+            if(i==n-1) return jump;
+            farthest=max(farthest,i+nums[i]);
+            if(curr_end==i) // explored all the possibilties we could made
+            {
+                if(farthest==i && nums[0]==0)
+                    return -1;    
+                jump++;
+            curr_end=farthest;
+            }
+            
+            
+        }
+        return jump;
+        
+        
+    }
+}; 
