@@ -1,0 +1,68 @@
+//find quad whose' sum is equal to given sum
+
+// Approaches:
+// 1>. O(n^4) 
+// 1>.sort+3pointer+binarySearch------->O(nlogn+n^3logn)
+// 2>.sort and 2 loop and use two pointer O(nlogn+n^3)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void quad(vector<int> v,vector<vector<int>>&res,int target )
+{
+    if(v.size()==0) return;
+    sort(v.begin(),v.end());
+    for(int i=0;i<v.size();i++){
+        for(int j=i+1;j<v.size();j++){
+            int target_2 = target-v[i]-v[j];
+            int front=j+1;
+            int back=v.size()-1;
+            while(front<back) 
+            {
+                int two_sum = v[front] + v[back];
+                if(two_sum < target_2) front++;
+                else if(two_sum > target_2) back--;
+                else{
+                    vector<int>temp(4);
+                    temp[0]= v[i];
+                    temp[1]= v[j];
+                    temp[2]= v[front];
+                    temp[3]= v[back];
+                    res.push_back(temp);
+                    while(front < back && v[front]==temp[2]) front++;
+                    while(front < back && v[front]==temp[3]) back--;
+
+                }
+
+            }
+            while(j+1 < v.size() && v[j]==v[j+1]) j++;
+
+        }
+        while(i+1 < v.size() && v[i]==v[i+1]) i++;
+    }
+
+}
+
+int main()
+{
+    vector<int> v;
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        v.push_back(x);
+    }    
+    vector<vector<int> >res;
+    int sum;
+    cin>>sum;
+    quad(v,res,sum);
+    for(int i=0;i<res.size();i++)
+    {
+        for(int j=0;j<res[i].size();j++)
+            cout<<res[i][j]<<" ";
+        cout<<"\n";     
+    }
+    return 0;
+}
