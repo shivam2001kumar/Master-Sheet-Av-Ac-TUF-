@@ -1,0 +1,27 @@
+// find duplicate in an array of n+1 integers
+// Approaches:
+// 1>. sort and traverse
+// 2>. hashing
+// 3>. floyd's cycle method ( slow and fast pointer approach )
+
+// Method 3: works when only one element is repeated
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int slow=nums[0];
+        int fast=nums[0];
+       do
+        {
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        } while(slow!=fast);
+        fast=nums[0];
+        while(slow!=fast)
+        {
+            slow=nums[slow];
+            fast=nums[fast];
+        }
+        return slow;
+    }
+};
