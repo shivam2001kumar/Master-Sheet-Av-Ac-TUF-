@@ -1,0 +1,21 @@
+// Approaches:
+// 1. Brute force O(n^2)
+// 2. (prefix array/maintain only sum) with hashing O(n)time and O(n) space
+
+bool subArrayExists(int arr[], int n)
+{
+    //Your code here
+    unordered_map<int,bool> mp;
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=arr[i];
+        if(sum==0 || mp.count(sum)==true)
+            return true;
+        else
+            mp[sum]=true;
+    }
+    return false;
+}
+
+
