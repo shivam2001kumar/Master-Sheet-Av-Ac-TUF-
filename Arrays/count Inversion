@@ -1,0 +1,62 @@
+// count the inversion
+
+// Approaches:
+// 1>. Brute force solution O(n^2)
+// 2>. Enhanced Merge sort
+
+#include<bits/stdc++.h>
+using namespace std;
+int merge(int arr[],int temp[],int l,int mid,int r){
+    int count=0;
+    int i=l,j=mid+1;
+    int k=l;
+    while(i<=mid && j<=r)
+    {
+        if(arr[i]>arr[j])
+        {   temp[k++]=arr[j];
+            count+=(mid+1-i);
+            j++;
+        }
+        else
+        {   
+            temp[k++]=arr[i];
+            i++;
+        }
+                
+    }
+    while(i<=mid)
+    {
+        temp[k++]=arr[i++];
+    }
+    while(j<=r)
+    {
+        temp[k++]=arr[j++];
+    }
+    for(int i=l;i<=r;i++)
+    {
+        arr[i]=temp[i];
+    }
+    return count;
+}
+int countInversion(int arr[],int temp[],int l,int r)
+{
+    int count=0;
+    if(r>l)
+    {
+        int mid=l+(r-l)/2;
+        count+=countInversion(arr,temp,l,mid);
+        count+=countInversion(arr,temp,mid+1,r);
+        count+=merge(arr,temp,l,mid,r);
+    }
+    return count;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    int temp[n];
+    for(int i=0;i<n;i++) cin>>arr[i];
+    cout<<countInversion(arr,temp,0,n-1);
+    return 0;
+}
