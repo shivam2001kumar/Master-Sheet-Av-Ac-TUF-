@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+#define MAX 100000
+
+int multiplyNum(int x,int arr[],int digit_size)
+{
+    int carry=0;
+    for(int i=0;i<digit_size;i++)
+    {
+        int product=arr[i]*x+carry;
+        arr[i]=product%10;
+        carry=product/10;
+    }
+    while(carry)
+    {
+        arr[digit_size]=carry%10;
+        carry=carry/10;
+        digit_size++;
+    }
+    return digit_size;
+}
+
+void factorial(int num)
+{
+    int arr[MAX];
+    int digit_size=1;
+    arr[0]=1;
+    for(int i=2;i<=num;i++)
+     digit_size=multiplyNum(i,arr,digit_size);
+    // The factorial of the array
+    for(int i=digit_size-1;i>=0;i--)
+        cout<<arr[i];
+}
+
+int main() {
+	//code
+    int test;
+    cin>>test;
+    while(test--)
+    {
+        int num;
+        cin>>num;
+        factorial(num);
+        cout<<endl;
+    }
+	return 0;
+}
