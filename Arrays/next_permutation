@@ -1,0 +1,55 @@
+//next permutation
+// Approaches:
+// 1>.sort and use std::next_permutation(arr,arr+3) store it in vector ,find the next combination from the vector
+// 2>.Brute force --> sort + generate all permutation O(n!*n) without stl
+// 3>. case analysis --> O(n)
+
+// Using STL
+// do
+// {
+// for(int i=0;i<n;i++) cout<<arr[i]<<" ";  // print all permuatation
+// }while(next_permutation(arr,arr+n));
+
+// Method optimal
+#include<bits/stdc++.h>
+using namespace std;
+ void nextPermutation(int arr[],int n)
+ {
+     if(n<=1) return;
+     int mark=-1;
+     for(int i=n-1;i>0;i--)
+     {
+         if(arr[i]>arr[i-1])
+         {
+             mark=i-1; // we get position where we can explore/plant next choice
+             break;
+         }
+     }
+     if(mark==-1) // the given array is already in its last permutation
+     {
+         reverse(arr,arr+n);
+         return;
+     }
+     int pos=n-1; // keep the position which is swaped with mark position
+    for(int i=n-1;i>mark;i--)
+    {
+        if(arr[i]>arr[mark])
+        {
+            pos=i;
+            break;
+        }
+    }
+    swap(arr[mark],arr[pos]);
+    reverse(arr+mark+1,arr+n);
+ }
+
+  int main()
+  {
+      int n;
+      cin>>n;
+      int arr[n];
+      for(int i=0;i<n;i++) cin>>arr[i];
+      nextPermutation(arr,n);
+      for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+      return 0;
+  }
