@@ -1,0 +1,56 @@
+// It contains the algorithm stl in c++
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[]={9,9,2,1,5,4,7,8,9,3};
+    int n=sizeof(arr)/sizeof(int);
+    
+    //==================== sort
+    sort(arr,arr+n);
+    // for(auto i:arr) cout<<i<<" ";
+
+    //================== Reverse
+    // reverse(arr,arr+n);
+    // for(auto i:arr) cout<<i<<" ";
+
+    // ============ Max Element
+    // cout<<*max_element(arr,arr+n);
+
+
+    // =============== Min Element
+    // cout<<*min_element(arr,arr+n);
+
+
+    // ============== sum of array
+    // cout<<accumulate(arr,arr+n,0);
+
+    // ================== count occurance of number
+    // cout<<count(arr,arr+n,9);
+
+    // ================== find
+    // if(find(arr,arr+n,9)!=(arr+n))
+    //     cout<<"Element found";
+    // else
+    //     cout<<"\n not found";
+
+
+    // =============== Binary search
+    // cout<<binary_search(arr,arr+n,11);
+
+    // cout<<lower_bound(arr,arr+n,8) - arr; //return 1st position of range with no element smaller than 8
+    // cout<<upper_bound(arr,arr+n,8) - arr; //return 1st position of range with all element greater than 8
+
+    
+    
+    // ====================== erase
+    vector<int>v={1,2,3,4,5,5,6,7};
+    // v.erase(v.begin()+2);
+    // for(auto i:v) cout<<i<<" ";
+
+    // v.erase(unique(v.begin(),v.end()),v.end());
+    // for(auto i:v) cout<<i<<" ";
+
+
+    return 0;
+}
