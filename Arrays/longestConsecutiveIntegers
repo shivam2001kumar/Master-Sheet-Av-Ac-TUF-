@@ -1,0 +1,62 @@
+// Longest consecutive approach
+// Approaches:
+// 1>. Sort and traverse O(nlogn) time
+// 2>. optimal solution O(n)(insertin set)+O(n)(traversal)+O(n)(lookup for increasing integers) = O(3n)
+
+// Approach 1:
+#include<bits/stdc++.h>
+using namespace std;
+int findLongestConseqSubseq(int arr[], int n)
+{
+  //Your code here
+  sort(arr,arr+n);
+  int temp=arr[0];
+  int count=1;
+  int mx=1;
+  for(int i=1;i<n;i++)
+  {
+      if(arr[i]==arr[i-1]) continue;
+      if(arr[i]==temp+1)
+      {
+          count++;
+          if(count>mx)
+          {
+              mx=count;
+          }
+          temp=arr[i];
+      }
+      else
+      {
+          count=1;
+          temp=arr[i];
+      }
+  }
+  return mx;
+  
+}
+
+
+Approach 2:
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        set<int>s;
+        for(int num:nums)
+        {
+            s.insert(num);
+        }
+        int longestStreak=0;
+        for(int num:nums){
+            if(!s.count(num-1)){
+                int currentNum=num;
+                int currentStreak=1;
+                while(s.count(currentNum+1)){
+                    currentNum+=1;
+                    currentStreak+=1;
+                }
+                longestStreak=max(longestStreak,currentStreak);
+            }
+        }
+        return longestStreak;
+    }
+};
