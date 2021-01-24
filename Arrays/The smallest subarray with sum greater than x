@@ -1,0 +1,57 @@
+// find smallest subarray with sum greater than th given sum
+// Approaches:
+// 1>. Brute force O(n^2)
+// 2>. Optimal O(n)
+
+// Method 1
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++) cin>>arr[i];
+    int sum;
+    cin>>sum;
+    int mn=INT_MAX; 
+    for(int i=0;i<n;i++)
+    {
+        int s=0;
+        for(int j=i;j<n;j++)
+        {
+            s+=arr[j];
+            if(s>sum)
+            {
+                mn=min(mn,j-i+1);
+            }
+        }
+    }
+    cout<<mn;
+    return 0;
+}
+
+
+// Method 2
+
+int sb(int arr[], int n, int x)
+{
+    // Your code goes here 
+    int i=0,j=0,s=0;
+    int mn=INT_MAX;
+    while(j<n && i<=j)
+    {
+        while(j<n && s<=x)
+        {
+            s+=arr[j];
+            j++;
+        }
+        while(s>x && i<j){
+            mn=min(mn,j-i);
+            s=s-arr[i];
+            i++;
+        }
+    }
+    return mn;
+}
