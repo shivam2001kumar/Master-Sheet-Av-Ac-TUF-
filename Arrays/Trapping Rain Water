@@ -1,0 +1,105 @@
+// Trapping Rain Water
+
+// Approaches:
+// 1>. Brute force solution O(n^2) O(1)
+// 2>. Extra Space O(n)time and O(n)space
+// 3>. Optimal solution O(n)time and O(1)space
+
+// Method 1
+int maxWater(int arr[], int n) 
+{
+     
+    // To store the maximum water 
+    // that can be stored
+    int res = 0;
+     
+    // For every element of the array
+    for (int i = 1; i < n-1; i++) {
+         
+        // Find the maximum element on its left
+        int left = arr[i];
+        for (int j=0; j<i; j++)
+           left = max(left, arr[j]);
+         
+        // Find the maximum element on its right   
+        int right = arr[i];
+        for (int j=i+1; j<n; j++)
+           right = max(right, arr[j]); 
+        
+       // Update the maximum water    
+       res = res + (min(left, right) - arr[i]);   
+    }
+ 
+    return res; 
+} 
+
+
+
+// Method 2
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+		int test;
+	cin>>test;
+	while(test--)
+	{
+	    int size;
+	    cin>>size;
+	    int arr[size];
+	    for(int i=0;i<size;i++)     cin>>arr[i];
+	    int left[size],right[size];
+	    left[0]=arr[0];
+	    int temp[size]={0};
+	    right[size-1]=arr[size-1];
+	    int lmax=arr[0],rmax=arr[size-1];
+	    for(int i=1;i<size;i++)
+	    {
+	        left[i]=max(left[i-1],arr[i]);
+	    }
+	    for(int i=size-2;i>=0;i--)
+	    {
+	        right[i]=max(right[i+1],arr[i]);
+	   }
+	    
+	    for(int i=1;i<size-1;i++)
+	    {   
+	        temp[i]=min(left[i],right[i])-arr[i];
+	    }
+	    int sum=0;
+	    for(int i=1;i<size-1;i++)   sum+=temp[i];
+	    cout<<sum<<endl;
+	}  
+	return 0;
+}
+
+
+// Method 3 O(n)time and O(1)space 
+int trappingWater(int arr[], int n){
+
+    // Your code here
+    // mi=maximum from left
+    // ma=maximum from right
+    int mi=0,ma=0,ans=0,l=0,h=n-1;
+    while(l<=h)
+    {
+        if(arr[l]<arr[h]) // calculate water stored from left
+        {
+            if(arr[l]>mi)
+                mi=arr[l];
+            else
+                ans=ans+(mi-arr[l]);
+            l++;
+        }
+        else            //calculate water stored from right
+        {
+            if(arr[h]>ma)
+                ma=arr[h];
+            else
+                ans=ans+(ma-arr[h]);
+            h--;
+        }
+    }
+    return ans;
+}
