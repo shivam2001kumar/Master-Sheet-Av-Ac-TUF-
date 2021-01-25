@@ -1,0 +1,45 @@
+// Best time to buy and sell stock
+
+// Approaches:
+// 1. Brute force O(n^2)
+// 2. Optimal solution O(n)
+
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int prices[n];
+    for(int i=0;i<n;i++) cin>>prices[i];
+    int mx=0;
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=i+1;j<n;j++)
+            mx=max(mx,prices[j]-prices[i]);
+    }
+    cout<<mx;
+    return 0;
+}
+
+
+// Optimal solution
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int mx=0;
+        int n=prices.size();
+        for(int i=0;i<n-1;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(prices[j]>prices[i])
+                {
+                    mx=max(mx,prices[j]-prices[i]);
+                }
+            }
+        }
+        return mx;
+    }
+};
