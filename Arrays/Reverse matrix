@@ -1,0 +1,52 @@
+// Rotate matrix 
+
+// Approaches:
+
+// 1>. Brute force use extra space put 1st row of matrix to last column of new matrix ,then 2nd row to 2nd last col and so on. O(n^2) time + O(n^2 ) extra space
+// 2>. Transpose and reverse [ O(n^2)+O(n^2) ]time and O(1) extra space
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n][n];
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cin>>arr[i][j];
+        }
+    }
+    // Transpose of matrix
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i;j<n;j++)
+        {
+            swap(arr[i][j],arr[j][i]);
+        }
+        // Reverse each element for all rows -> clockwise
+         reverse(arr[i],arr[i]+n);
+    }
+    // Reverse rows for anticlock wise
+   for(int i=0;i<n/2;i++)
+   {
+       for(int j=0;j<n;j++)
+       {
+           swap(arr[i][j],arr[n-1-i][j]);
+       }
+   }
+
+    // Printing of matrix
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cout<<arr[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+
+    return 0;
+}
