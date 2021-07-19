@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
+template<typename T>
 class vectors{
-   float x,y,z;
+   T x,y,z;
    public:
    vectors()
    {
@@ -11,7 +11,7 @@ class vectors{
        y=0;
        z=0;
    }
-   vectors(float x,float y,float z)
+   vectors(T x,T y,T z)
    {
        this->x=x;
        this->y=y;
@@ -19,7 +19,8 @@ class vectors{
 
    } 
    
-   void display(float i,float j,float k)
+   
+   void display(T i,T j,T k)
    {
        cout<<i<<"i";
        if(j>=0) cout<<"+";
@@ -27,6 +28,7 @@ class vectors{
        if(k>=0) cout<<"+";
        cout<<k<<"k";
    }
+   
    void addition(vectors a,vectors b)
    {
        this->x = a.x+b.x;
@@ -35,6 +37,7 @@ class vectors{
     
     display(this->x,this->y,this->z);
    } 
+   
    void subtraction(vectors a,vectors b)
    {
        this->x = a.x-b.x;
@@ -42,6 +45,7 @@ class vectors{
        this->z = a.z-b.z;
        display(this->x,this->y,this->z);
    }
+   
    void dotProduct(vectors a , vectors b)
    {
        this->x = a.x*b.x;        
@@ -49,15 +53,19 @@ class vectors{
        this->z = a.z*b.z;        
        cout<<(this->x+this->y+this->z);
    }
+   
+   
    void distance(vectors a,vectors b)
    {
        cout<<sqrt(pow(b.x-a.x,2)+pow(b.y-a.y,2)+pow(b.z-a.z,2));
    }
 
-   float magnitude()
+   
+   T magnitude()
    {
        return sqrt(pow(this->x,2)+pow(this->y,2)+pow(this->z,2));
    } 
+   
    void crossProduct(vectors a, vectors b)
    {
        this->x = (a.y*b.z - a.z*b.y);
@@ -65,9 +73,10 @@ class vectors{
        this->z = (a.x*b.y - a.y*b.x);
        display(this->x,this->y,this->z);
    }
+   
    void normalVector(vectors a)
    {
-       float mg=magnitude();
+       T mg=magnitude();
        x=(a.x/mg);
        y=(a.y/mg);
        z=(a.z/mg);
@@ -75,7 +84,8 @@ class vectors{
    } 
 
 };
-void view(float i,float j,float k)
+template<typename T>
+void view(T i,T j,T k)
    {
        cout<<i<<"i";
        if(j>=0) cout<<"+";
@@ -96,9 +106,9 @@ int main()
     cout<<"\nVector B : ";
     view(a2,b2,c2);
     cout<<"\n\n";
-    vectors A(a1,b1,c1);
-    vectors B(a2,b2,c2);
-    vectors ob;
+    vectors<float> A(a1,b1,c1);
+    vectors<float> B(a2,b2,c2);
+    vectors<float> ob;
     cout<<"Addition -> ";
     ob.addition(A,B);
     cout<<"\nSubtraction -> ";
