@@ -1,0 +1,117 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+class vectors{
+   float x,y,z;
+   public:
+   vectors()
+   {
+       x=0;
+       y=0;
+       z=0;
+   }
+   vectors(float x,float y,float z)
+   {
+       this->x=x;
+       this->y=y;
+       this->z=z;
+
+   } 
+   
+   void display(float i,float j,float k)
+   {
+       cout<<i<<"i";
+       if(j>=0) cout<<"+";
+       cout<<j<<"j";
+       if(k>=0) cout<<"+";
+       cout<<k<<"k";
+   }
+   void addition(vectors a,vectors b)
+   {
+       this->x = a.x+b.x;
+       this->y = a.y+b.y;
+       this->z = a.z+b.z;
+    
+    display(this->x,this->y,this->z);
+   } 
+   void subtraction(vectors a,vectors b)
+   {
+       this->x = a.x-b.x;
+       this->y = a.y-b.y;
+       this->z = a.z-b.z;
+       display(this->x,this->y,this->z);
+   }
+   void dotProduct(vectors a , vectors b)
+   {
+       this->x = a.x*b.x;        
+       this->y = a.y*b.y;        
+       this->z = a.z*b.z;        
+       cout<<(this->x+this->y+this->z);
+   }
+   void distance(vectors a,vectors b)
+   {
+       cout<<sqrt(pow(b.x-a.x,2)+pow(b.y-a.y,2)+pow(b.z-a.z,2));
+   }
+
+   float magnitude()
+   {
+       return sqrt(pow(this->x,2)+pow(this->y,2)+pow(this->z,2));
+   } 
+   void crossProduct(vectors a, vectors b)
+   {
+       this->x = (a.y*b.z - a.z*b.y);
+       this->y = (a.z*b.x - a.x*b.z );
+       this->z = (a.x*b.y - a.y*b.x);
+       display(this->x,this->y,this->z);
+   }
+   void normalVector(vectors a)
+   {
+       float mg=magnitude();
+       x=(a.x/mg);
+       y=(a.y/mg);
+       z=(a.z/mg);
+        display(x,y,z);
+   } 
+
+};
+void view(float i,float j,float k)
+   {
+       cout<<i<<"i";
+       if(j>=0) cout<<"+";
+       cout<<j<<"j";
+       if(k>=0) cout<<"+";
+       cout<<k<<"k";
+   }
+int main()
+{
+    cout<<"Enter in format a i + b j + c k\n";
+    float a1,a2,b1,b2,c1,c2;
+    cout<<"Vector A : ";
+    cin>>a1>>b1>>c1;
+    cout<<"\nVector B : ";
+    cin>>a2>>b2>>c2;
+    cout<<"\nVector A : ";
+    view(a1,b1,c1);
+    cout<<"\nVector B : ";
+    view(a2,b2,c2);
+    cout<<"\n\n";
+    vectors A(a1,b1,c1);
+    vectors B(a2,b2,c2);
+    vectors ob;
+    cout<<"Addition -> ";
+    ob.addition(A,B);
+    cout<<"\nSubtraction -> ";
+    ob.subtraction(A,B);
+    cout<<"\nScalar/Dot Product -> ";
+    ob.dotProduct(A,B);   
+    cout<<"\nVector/Cross Product -> ";
+    ob.crossProduct(A,B);
+    cout<<"\nmagnitude -> ";
+    cout<<A.magnitude();
+    cout<<"\nNormal Vector -> ";
+    ob.normalVector(A); cout<<"\n";
+    cout<<"Distance between vectors -> ";
+    ob.distance(A,B);
+    
+}
